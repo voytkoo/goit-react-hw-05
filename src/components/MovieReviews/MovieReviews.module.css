@@ -1,0 +1,16 @@
+.movieReviews {
+  list-style: none;
+  padding: 0;
+}
+
+.reviewItem {
+  margin-bottom: 10px;
+}
+
+.reviewAuthor {
+  font-weight: bold;
+}
+
+.reviewContent {
+  font-style: italic;
+}

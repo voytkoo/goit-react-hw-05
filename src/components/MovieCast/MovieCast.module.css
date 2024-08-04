@@ -1,0 +1,18 @@
+.movieCast {
+  list-style: none;
+  padding: 0;
+}
+
+.castItem {
+  margin-bottom: 10px;
+}
+
+.castImage {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.castName {
+  font-weight: bold;
+}

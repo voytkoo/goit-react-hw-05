@@ -1,35 +1,35 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
-import clsx from "clsx";
-import HomePage from "path/to/pages/HomePage";
-import MovieDetailsPage from "path/to/pages/MovieDetailsPage";
-import MoviesPage from "path/to/pages/MoviesPage";
-import NotFoundPage from "path/to/pages/NotFoundPage";
-import s from "./App.module.css";
+import s from "../../src/App.module.css";
 
-const buildLinkClass = ({ isActive }) => {
-  return clsx(s.link, isActive && s.active);
-};
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("../pages/MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() =>
+  import("../pages/MovieDetailsPage/MovieDetailsPage")
+);
+const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
-export const App = () => {
-  return (
-    <div className={s.container}>
-      <header className={s.header}>
-        <nav className={s.nav}>
-          <NavLink to="/" className={buildLinkClass}>
-            Home
-          </NavLink>
-          <NavLink to="/movies" className={buildLinkClass}>
-            Movies
-          </NavLink>
-        </nav>
-      </header>
+const App = () => (
+  <div>
+    <header className={s.header}>
+      <nav>
+        <NavLink to="/" end>
+          Home
+        </NavLink>
+        <NavLink to="/movies">Movies</NavLink>
+      </nav>
+    </header>
+    <main>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId/*" element={<MovieDetailsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+    </main>
+  </div>
+);
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </div>
-  );
-};
+export default App;

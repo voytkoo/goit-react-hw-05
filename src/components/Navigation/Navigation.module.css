@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin-right: 10px;
+  color: black;
+  font-weight: bold;
+}
+.link {
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+.active {
+  color: blueviolet;
+}
