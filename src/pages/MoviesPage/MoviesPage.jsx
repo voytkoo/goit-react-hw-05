@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
-import { searchMovies } from "../../services/api";
 import { useSearchParams } from "react-router-dom";
+import { searchMovies } from "../../services/api";
 import MovieList from "../../components/MovieList/MovieList";
 import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("query") || "");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
 
-  const query = searchParams.get("query") || "";
-
   useEffect(() => {
-    if (!query) return;
-
     const fetchMovies = async () => {
+      const queryFromParams = searchParams.get("query");
+      if (!queryFromParams) return;
       try {
-        const results = await searchMovies(query);
+        const results = await searchMovies(queryFromParams);
         setMovies(results);
         setError(null);
       } catch (error) {
@@ -25,19 +24,21 @@ const MoviesPage = () => {
     };
 
     fetchMovies();
-  }, [query]);
+  }, [searchParams]);
 
   const handleInputChange = (e) => {
-    setSearchParams({ query: e.target.value });
+    setQuery(e.target.value);
   };
 
   const handleSearch = (event) => {
     event.preventDefault();
     if (!query.trim()) {
       setError("Please enter a search term.");
+      setMovies([]);
       return;
     }
     setError(null);
+    setSearchParams({ query });
   };
 
   return (
@@ -49,6 +50,7 @@ const MoviesPage = () => {
           className={s.searchInput}
           value={query}
           onChange={handleInputChange}
+          placeholder="Search movies"
         />
         <button type="submit" className={s.searchButton}>
           Search
