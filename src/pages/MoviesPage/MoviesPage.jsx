@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { searchMovies } from "../../services/api";
+import { useSearchParams } from "react-router-dom";
 import MovieList from "../../components/MovieList/MovieList";
 import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
 
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
+  const query = searchParams.get("query") || "";
+
   useEffect(() => {
     if (!query) return;
 
@@ -26,6 +26,10 @@ const MoviesPage = () => {
 
     fetchMovies();
   }, [query]);
+
+  const handleInputChange = (e) => {
+    setSearchParams({ query: e.target.value });
+  };
 
   const handleSearch = (event) => {
     event.preventDefault();
