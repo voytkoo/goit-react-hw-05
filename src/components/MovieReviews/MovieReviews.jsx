@@ -11,15 +11,27 @@ const MovieReviews = () => {
     getMovieReviews(movieId).then((data) => setReviews(data.results));
   }, [movieId]);
 
+  const uniqueReviews = Array.from(
+    new Set(reviews.map((review) => review.id))
+  ).map((id) => {
+    return reviews.find((review) => review.id === id);
+  });
+
   return (
-    <ul className={s.movieReviews}>
-      {reviews.map((review) => (
-        <li key={review.id} className={s.reviewItem}>
-          <p className={s.reviewAuthor}>Author: {review.author}</p>
-          <p className={s.reviewContent}>{review.content}</p>
-        </li>
-      ))}
-    </ul>
+    <div className={s.reviews}>
+      {uniqueReviews.length === 0 ? (
+        <p>No reviews available</p>
+      ) : (
+        <ul>
+          {uniqueReviews.map((review) => (
+            <li key={review.id} className={s.reviewItem}>
+              <h3>{review.author}</h3>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 

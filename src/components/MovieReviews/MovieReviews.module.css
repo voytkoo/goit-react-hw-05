@@ -2,7 +2,9 @@
   list-style: none;
   padding: 0;
 }
-
+.error {
+  color: red;
+}
 .reviewItem {
   margin-bottom: 10px;
 }

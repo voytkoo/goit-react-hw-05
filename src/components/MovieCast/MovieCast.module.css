@@ -16,3 +16,6 @@
 .castName {
   font-weight: bold;
 }
+error {
+  color: red;
+}

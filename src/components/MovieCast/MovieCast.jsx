@@ -11,9 +11,15 @@ const MovieCast = () => {
     getMovieCredits(movieId).then((data) => setCast(data.cast));
   }, [movieId]);
 
+  const uniqueCast = Array.from(new Set(cast.map((actor) => actor.id))).map(
+    (id) => {
+      return cast.find((actor) => actor.id === id);
+    }
+  );
+
   return (
     <ul className={s.movieCast}>
-      {cast.map((actor) => (
+      {uniqueCast.map((actor) => (
         <li key={actor.id} className={s.castItem}>
           <img
             src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}

@@ -1,7 +1,14 @@
 .pageContainer {
   padding: 20px;
 }
-
+.detailsButton {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .pageTitle {
   font-size: 24px;
   font-weight: bold;
@@ -10,14 +17,28 @@
 
 .movieDetails {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .moviePoster {
-  width: 200px;
+  width: 300px;
+  border-radius: 10px;
   margin-right: 20px;
 }
 
-.movieInfo {
-  flex: 1;
+.error {
+  color: red;
+}
+.detailsLink {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: lightblue;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+  margin-right: 10px;
 }

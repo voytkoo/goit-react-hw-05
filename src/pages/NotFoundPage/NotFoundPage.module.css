@@ -1,9 +1,19 @@
 .pageContainer {
   padding: 20px;
+  text-align: center;
 }
 
 .pageTitle {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+}
+.homeLink {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: lightblue;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
 }
